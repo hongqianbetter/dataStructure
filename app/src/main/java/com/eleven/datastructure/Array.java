@@ -54,7 +54,7 @@ public class Array<E> {
 
     private void resize(int newCapacity) {
       E[] newData= (E[]) new Object[newCapacity];
-      for (int i=0;i<data.length;i++){
+      for (int i=0;i<size;i++){
           newData[i]=data[i];
       }
       data=newData;
@@ -67,11 +67,12 @@ public class Array<E> {
             throw new IllegalArgumentException("remove Failed,index is not illegal");
         }
         E ret=data[index];
-        for (int i=index;i<size;i++){
+        for (int i=index+1;i<size;i++){
             data[i-1]=data[i];
         }
+
+        data[size-1]=null;
         size--;
-        data[size]=null;
         if(size==data.length/4&&data.length/2!=0) {
             resize(data.length/2);
         }
@@ -126,9 +127,14 @@ public class Array<E> {
 
     @Override
     public String toString() {
-        return "Array{" +
-                "data=" + Arrays.toString(data) +
-                ", size=" + size +
-                '}';
+//        return "Array{" +
+//                "data=" + Arrays.toString(data) +
+//                ", size=" + size +
+//                '}';
+        StringBuilder builder = new StringBuilder();
+        for (int i=0;i<size;i++){
+            builder.append(data[i]+",");
+        }
+        return builder.toString();
     }
 }
