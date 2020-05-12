@@ -37,4 +37,11 @@ public class Example {
 
         return stack.isEmpty();
     }
+
+    public  static void main(String []args){
+        Example example = new Example();
+        boolean check = example.check();
+        System.out.println(check+"------");
+
+    }
 }

@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,9 +18,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         String str = "({[}})";
-
-
-        Array<String> integerArray = new Array<>();
+        ArrayList<Object> objects = new ArrayList<>();
+//        objects.remove()
+//        BlockingQueue<Object> objects = new ArrayBlockingQueue();
+//        objects.
+//        Array<String> integerArray = new Array<>();
 //        integerArray.add(0,1+"");
 //        integerArray.add(1,2+"");
 //        integerArray.add(2,3+"");
