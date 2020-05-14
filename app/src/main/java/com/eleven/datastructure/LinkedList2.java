@@ -1,5 +1,7 @@
 package com.eleven.datastructure;
 
+import androidx.annotation.NonNull;
+
 public class LinkedList2<E> {
 
     private Node dumpHead;
@@ -102,6 +104,22 @@ public class LinkedList2<E> {
         size--;
         return retNode.e;
 
+    }
+
+    public void removeElement(E e) {
+        Node prev=dumpHead;
+        while (prev.next!=null){
+            if(prev.next.e.equals(e))
+                break;
+                prev=prev.next;
+
+        }
+
+        if(prev.next!= null) {
+            Node delNode=prev.next;
+            prev.next=delNode.next;
+            delNode.next=null;
+        }
     }
 
 

@@ -17,123 +17,123 @@ public class BinaryST<E extends Comparable<E>> {
 //        } else {
 //            add(root, e);
 //        }
-        root=add(root,e);
+        root = add(root, e);
 
 
     }
 
     private Node add(Node node, E e) {
-          if(node==null) {
-              size++;
-              return new Node(e);
-          }
-          if(e.compareTo(node.e)<0) {
-              node.left=add(node.left,e);
-          }else if(e.compareTo(node.e)>0) {
-              node.right=add(node.right,e);
-          }
-          return node;
+        if (node == null) {
+            size++;
+            return new Node(e);
+        }
+        if (e.compareTo(node.e) < 0) {
+            node.left = add(node.left, e);
+        } else if (e.compareTo(node.e) > 0) {
+            node.right = add(node.right, e);
+        }
+        return node;
     }
 
-    public boolean contains(E e){
-      return   contains(root,e);
+    public boolean contains(E e) {
+        return contains(root, e);
     }
 
     private boolean contains(Node node, E e) {
-        if(node==null) {
+        if (node == null) {
             return false;
         }
-        if(e.compareTo(node.e)==0) {
+        if (e.compareTo(node.e) == 0) {
             return true;
-        }else if(e.compareTo(node.e)<0) {
-           return contains(node.left,e);
-        }else {
-            return contains(node.right,e);
+        } else if (e.compareTo(node.e) < 0) {
+            return contains(node.left, e);
+        } else {
+            return contains(node.right, e);
         }
     }
 
     //前序遍历
-    public void preOrder(){
-         preOrder(root);
+    public void preOrder() {
+        preOrder(root);
     }
 
     private void preOrder(Node node) {
-         if(node==null) {
-             return;
-         }
-         System.out.println(node.e+"--------");
-         preOrder(node.left);
-         preOrder(node.right);
+        if (node == null) {
+            return;
+        }
+        System.out.println(node.e + "--------");
+        preOrder(node.left);
+        preOrder(node.right);
     }
 
-    private void inOrder(){
+    private void inOrder() {
         inOrder(root);
     }
 
     private void inOrder(Node node) {
-        if(node==null) {
+        if (node == null) {
             return;
         }
         inOrder(node.left);
-        System.out.println(node.e+"--------");
+        System.out.println(node.e + "--------");
         inOrder(node.right);
     }
 
-    private void postOrder(){
+    private void postOrder() {
         postOrder(root);
     }
 
     private void postOrder(Node node) {
-        if(node==null) {
+        if (node == null) {
             return;
         }
         postOrder(node.left);
         postOrder(node.right);
-        System.out.println(node.e+"--------");
+        System.out.println(node.e + "--------");
     }
-    
+
     //寻找二分搜索树的最小值
-    public E minimum(){
-        if(size==0) {
+    public E minimum() {
+        if (size == 0) {
             throw new IllegalStateException("the tree is empty");
         }
-       return minimum(root).e;
+        return minimum(root).e;
     }
 
     private Node minimum(Node node) {
-        if(node.left==null) {
+        if (node.left == null) {
             return node;
         }
-      return   minimum(node.left);
+        return minimum(node.left);
     }
 
     //寻找二分搜索树的最大值
-    public E maxmum(){
-        if(size==0) {
+    public E maxmum() {
+        if (size == 0) {
             throw new IllegalStateException("the tree is empty");
         }
         return maxmum(root).e;
     }
 
     private Node maxmum(Node node) {
-        if(node.right==null) {
+        if (node.right == null) {
             return node;
         }
-        return   maxmum(node.right);
+        return maxmum(node.right);
     }
 
     //二叉树层序遍历
-    public void levelOrder(){
-        Queue<Node> queue=new java.util.LinkedList<Node>();
+    public void levelOrder() {
+        Queue<Node> queue = new java.util.LinkedList<Node>();
         queue.add(root);
-        while (!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             Node cur = queue.remove();
 
-            System.out.println(cur.e+"---------");
-            if(cur.left!=null) {
+            System.out.println(cur.e + "---------");
+            if (cur.left != null) {
                 queue.add(cur.left);
             }
-            if(cur.right!=null) {
+            if (cur.right != null) {
                 queue.add(cur.right);
             }
 
@@ -193,75 +193,75 @@ public class BinaryST<E extends Comparable<E>> {
     }
 
 
-    public E removeMin(){
+    public E removeMin() {
         E ret = minimum();
-       root=removeMin(root);
+        root = removeMin(root);
         return ret;
     }
 
     private Node removeMin(Node node) {
-        if(node.left==null) {
-                Node right = node.right;
-                node.right=null;
-                size--;
-                return right;
+        if (node.left == null) {
+            Node right = node.right;
+            node.right = null;
+            size--;
+            return right;
         }
-       node.left=removeMin(node.left);
+        node.left = removeMin(node.left);
         return node;
     }
 
-    public void remove(E e){
-        root=remove(root,e);
+    public void remove(E e) {
+        root = remove(root, e);
     }
 
     private Node remove(Node node, E e) {
-        if (node==null){
+        if (node == null) {
             return null;
         }
-            if(e.compareTo(node.e)<0) {
-               node.left=remove(node.left,e);
-                return node;
-            }else if(e.compareTo(node.e)>0){
-             node.right=remove(node.right,e);
-             return node;
-            }else { //相等
-                 if(node.left==null) {
-                     Node right = node.right;
-                     node.right=null;
-                     size--;
-                     return right;
-                 }
-
-                if(node.right==null) {
-                    Node left = node.left;
-                    node.left=null;
-                    size--;
-                    return left;
-                }
-
-               Node successor = minimum(node.right);
-                successor.right = removeMin(node.right);
-                 successor.left=node.left;
-                 node.left=node.right=null;
-                 return successor;
+        if (e.compareTo(node.e) < 0) {
+            node.left = remove(node.left, e);
+            return node;
+        } else if (e.compareTo(node.e) > 0) {
+            node.right = remove(node.right, e);
+            return node;
+        } else { //相等
+            if (node.left == null) {
+                Node right = node.right;
+                node.right = null;
+                size--;
+                return right;
             }
+
+            if (node.right == null) {
+                Node left = node.left;
+                node.left = null;
+                size--;
+                return left;
+            }
+
+            Node successor = minimum(node.right);
+            successor.right = removeMin(node.right);
+            successor.left = node.left;
+            node.left = node.right = null;
+            return successor;
+        }
     }
 
 
-    public E removeMax(){
+    public E removeMax() {
         E ret = maxmum();
-        root=removeMax(root);
+        root = removeMax(root);
         return ret;
     }
 
     private Node removeMax(Node node) {
-        if(node.right==null) {
+        if (node.right == null) {
             Node left = node.left;
-            node.left=null;
+            node.left = null;
             size--;
             return left;
         }
-        node.right=removeMin(node.right);
+        node.right = removeMin(node.right);
         return node;
     }
 }
