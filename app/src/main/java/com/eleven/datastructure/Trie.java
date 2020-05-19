@@ -65,6 +65,28 @@ public class Trie {
         return true;
     }
 
+    public boolean search(String word) {
+        return match(root, word, 0);
+    }
+
+    public boolean match(Node node, String word, int index) {
+        if (index == word.length())
+            return node.isWord;
+        char c = word.charAt(index);
+        if (c != '.') {
+            if (node.next.get(c) == null)
+                return false;
+
+            return match(node.next.get(c), word, index + 1);
+        } else {
+            for (char nextChar : node.next.keySet()) {
+                if (match(node.next.get(nextChar), word, index + 1))
+                    return true;
+                return false;
+            }
+        }
+        return false;
+    }
 
     private class Node {
         public boolean isWord;
