@@ -7,7 +7,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.PriorityQueue;
 import java.util.TreeSet;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Object> objects = new ArrayList<>();
 
         TreeSet set=new TreeSet();
-        HashSet
+       new PriorityQueue ();
 
 //        objects.remove()
 //        BlockingQueue<Object> objects = new ArrayBlockingQueue();
